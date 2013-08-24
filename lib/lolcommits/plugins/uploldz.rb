@@ -20,9 +20,11 @@ module Lolcommits
         puts "Repo is empty, skipping upload"
       else
         plugdebug "Calling " + configuration['endpoint'] + " with repo " + repo
-        RestClient.post(configuration['endpoint'], 
+        RestClient.post(configuration['endpoint'],
           :file => File.new(self.runner.main_image),
-          :repo => repo)
+          :repo => repo,
+          :sha => runner.sha,
+          :message => runner.message)
       end
 
     end
